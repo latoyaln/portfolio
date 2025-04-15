@@ -17,9 +17,8 @@ const Home = () => {
   }
 
   return (
-    <section className="relative w-screen h-screen flex justify-center items-center overflow-hidden bg-midnight"> 
+    <section className="justify-center items-center overflow-hidden bg-midnight"> 
       <Header />
-
     </section>
   );
 };

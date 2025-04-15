@@ -22,6 +22,7 @@ module.exports = {
         p: '1.125rem',
         smalllabel: '1rem',
       },
+      
     },
   },
   plugins: [],
