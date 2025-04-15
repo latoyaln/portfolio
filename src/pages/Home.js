@@ -17,10 +17,10 @@ const Home = () => {
   }
 
   return (
-    <section className="justify-center items-center overflow-hidden bg-midnight"> 
+    <section className="flex p-10 justify-center h-[80vh] items-center overflow-hidden bg-midnight"> 
       <Header />
     </section>
-  );
+  ); 
 };
 
 export default Home;

@@ -18,9 +18,12 @@ module.exports = {
       },
       fontSize: {
         h1: '2rem',
-        h2: '1.8rem',
+        h2: '1.5rem',
         p: '1.125rem',
         smalllabel: '1rem',
+      },
+      maxWidth: {
+        '23ch': '23ch',
       },
       
     },
