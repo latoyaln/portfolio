@@ -1,22 +1,27 @@
+import React, { useContext, useEffect } from 'react';
+import { ContentfulContext } from '../api/contentfulFetch';
+import Header from '../components/introHeader';
 
-function App() {
+const Home = () => {
+  const { data, loading, fetchPageData } = useContext(ContentfulContext);
+  const pageId = 'home';
+
+  useEffect(() => {
+    if (!data[pageId]) {
+      fetchPageData(pageId);
+    }
+  }, [data, fetchPageData, pageId]);
+
+  if (loading || !data[pageId]) {
+    return <div className="loading-state">Loading Home...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Test
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <section className="relative w-screen h-screen flex justify-center items-center overflow-hidden bg-midnight"> 
+      <Header />
 
-export default App;
+    </section>
+  );
+};
+
+export default Home;
