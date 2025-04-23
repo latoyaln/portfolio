@@ -28,7 +28,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-midnight flex justify-between items-center px-10 py-10 text-daylight font-navbar text-smalllabel relative">
+    <nav className="bg-midnight flex justify-between items-center px-10 py-10 text-daylight font-body text-smalllabel relative">
       <div className="hidden md:flex items-center space-x-4">
         <Link to="/">
           <img src="/assets/LN-Logo-light.webp" alt="LN Design Logo" className="pr-10 h-10" />

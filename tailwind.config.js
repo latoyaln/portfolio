@@ -14,7 +14,7 @@ module.exports = {
         headings: ['DrukWideBold', 'Helvetica', 'sans-serif'],
         medium: ['DrukWideMedium', 'Helvetica', 'sans-serif'],
         italic: ['DrukWideItalic', 'Helvetica', 'sans-serif'],
-        navbar: ['AtypDisplayMedium', 'Helvetica', 'sans-serif'],
+        body: ['AtypDisplayMedium', 'Helvetica', 'sans-serif'],
       },
       fontSize: {
         h1: '2rem',
