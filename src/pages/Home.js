@@ -64,17 +64,7 @@ const Home = () => {
       <div className="relative">
         <SelectedProjects onScrollToAbout={scrollToAboutMe} />
       </div>
-      
-      {/* Color Transition Overlay */}
-      <div 
-        className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
-        style={{
-          background: `linear-gradient(to bottom, 
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, ${scrollProgress}) 100%)`,
-          opacity: scrollProgress
-        }}
-      />
+
       
       {/* About Me Section */}
       <section 
@@ -89,11 +79,9 @@ const Home = () => {
 
       {/* Blog Posts Section */}
       <section className="relative bg-daylight py-20">
-        <div className="container mx-auto px-4 sm:px-6 mb-12">
+        <div className="container text-center mx-auto px-4 sm:px-6 mb-12">
           <h2 className="text-h2 font-headings text-midnight mb-2">Blog</h2>
-          <p className="text-lg text-midnight max-w-2xl mx-auto">
-          Blijf op de hoogte van mijn nieuwste inzichten en tips over websites maken, webdesign en development.
-          </p>
+       
         </div>
         <BlogPosts />
       </section>
