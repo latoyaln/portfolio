@@ -89,10 +89,10 @@ const Home = () => {
 
       {/* Blog Posts Section */}
       <section className="relative bg-daylight py-20">
-        <div className="container mx-auto px-4 sm:px-6 text-center mb-12">
-          <h2 className="text-h2 font-headings text-midnight mb-2">Latest Blog Posts</h2>
+        <div className="container mx-auto px-4 sm:px-6 mb-12">
+          <h2 className="text-h2 font-headings text-midnight mb-2">Blog</h2>
           <p className="text-lg text-midnight max-w-2xl mx-auto">
-            Stay updated with my latest thoughts and insights on web development and design.
+          Blijf op de hoogte van mijn nieuwste inzichten en tips over websites maken, webdesign en development.
           </p>
         </div>
         <BlogPosts />

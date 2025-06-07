@@ -155,7 +155,7 @@ const SelectedProjects = () => {
         style={{ height: `${visibleProjects.length * 80}vh` }}
       >
         {/* Navigation Buttons - Vertical on the left */}
-        <div className="fixed left-8 top-1/2 transform -translate-y-1/2 z-50 flex flex-col space-y-3">
+        <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-50 flex flex-col space-y-3">
           {visibleProjects.map((_, idx) => (
             <button
               key={idx}

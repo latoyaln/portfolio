@@ -76,7 +76,7 @@ const BlogPosts = () => {
               </p>
               <Link 
                 to={`/blog/${post.sys.id}`}
-                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium group-hover:underline"
+                className="inline-flex items-center text-midnight hover:text-blue-800 font-medium group-hover:underline"
               >
                 Read More
                 <svg 
