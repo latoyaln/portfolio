@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef, useState } from 'react';
+import React, { useEffect, useContext, useRef, useState, useCallback } from 'react';
 import { ContentfulContext } from '../api/contentfulFetch';
 import { useLocalization } from '../contexts/LocalizationContext';
 import gsap from 'gsap';
@@ -91,6 +91,17 @@ const About = () => {
 
   const services = serviceItemCollection?.fields?.components || [];
 
+  const handleServiceClick = useCallback((idx) => {
+    setOpenIdx(openIdx === idx ? null : idx);
+  }, [openIdx]);
+
+  const handleKeyDown = useCallback((e, idx) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setOpenIdx(openIdx === idx ? null : idx);
+    }
+  }, [openIdx]);
+
   const title = currentLocale === 'nl' ? 'Over Mij' : 'About Me';
   const contactText = currentLocale === 'nl' ? 'Contact' : 'Contact';
 
@@ -128,12 +139,63 @@ const About = () => {
       <section className="min-h-[50vh] bg-white flex items-center justify-center">
         <div className="container mx-auto px-6 py-16">
           <div className="max-w-4xl mx-auto">
-            <blockquote className="text-3xl md:text-4xl font-headings text-midnight text-center leading-relaxed italic">
+            <blockquote className="text-2xl md:text-4xl font-headings text-midnight text-center leading-relaxed italic">
               "{aboutCard?.fields?.paragraph}"
             </blockquote>
           </div>
         </div>
       </section>
+
+      <div className="flex flex-col gap-0">
+        {services.map((service, idx) => (
+          <div
+            key={service.sys.id}
+            className="border-b border-midnight/10 last:border-b-0"
+          >
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 items-center cursor-pointer py-4 md:py-6 group"
+              onClick={() => handleServiceClick(idx)}
+              onMouseEnter={() => setOpenIdx(idx)}
+              onMouseLeave={() => setOpenIdx(null)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => handleKeyDown(e, idx)}
+              aria-expanded={openIdx === idx}
+              aria-controls={`service-content-${idx}`}
+            >
+              <div className="flex items-center h-full pl-4 sm:pl-12 justify-start sm:justify-start">
+                <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-200 select-none">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+              </div>
+              <div className="flex flex-col items-start justify-center h-full pr-4 sm:pr-12 mt-4 sm:mt-0">
+                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-headings text-midnight font-bold text-left transition-colors duration-200 group-hover:text-midnight/80">
+                  {service.fields?.title}
+                </h3>
+                <div
+                  id={`service-content-${idx}`}
+                  className={`transition-all duration-300 ease-in-out w-full ${
+                    openIdx === idx ? 'mt-2 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <p className="text-sm md:text-base lg:text-lg text-midnight">
+                    {service.fields?.textParagraph}
+                  </p>
+                  {openIdx === idx && (
+                    <a
+                      href="mailto:l.n.design@hotmail.com"
+                      className="inline-block mt-4 px-4 md:px-6 py-2 bg-midnight text-daylight rounded-lg font-bold shadow hover:bg-midnight/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-midnight focus:ring-offset-2"
+                      aria-label={currentLocale === 'nl' ? 'Contact opnemen' : 'Get in touch'}
+                    >
+                      {currentLocale === 'nl' ? 'Contact' : 'Contact'}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <section className="bg-daylight py-16">
         <div className="container mx-auto px-6">
