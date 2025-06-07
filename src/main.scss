@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'DrukWideBold';
+  src: url('../public/fonts/DrukWideBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'DrukWideItalic';
+  src: url('../public/fonts/DrukWideItalic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'DrukWideMedium';
+  src: url('../public/fonts/DrukWideMedium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'AtypDisplayMedium';
+  src: url('../public/fonts/AtypDisplayMedium.otf') format('opentype');
+}
