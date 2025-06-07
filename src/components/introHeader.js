@@ -60,7 +60,7 @@ const Header = () => {
 
   return (
     <section className="relative font-medium text-h2 md:text-h1 text-white">
-      <h2>I am {dynamicText},</h2>
+      <h2>Ik ben {dynamicText},</h2>
       <h1 className="max-w-23ch">{introText}</h1>
 
       <div className="flex justify-between mt-6 gap-4 group relative transition-all duration-300 ease-in-out">
