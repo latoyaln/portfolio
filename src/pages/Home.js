@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { ContentfulContext } from '../api/contentfulFetch';
 import Header from '../components/introHeader';
 import SelectedProjects from '../components/selectedProjects';
@@ -10,7 +10,6 @@ const Home = () => {
   const { data, loading, fetchPageData } = useContext(ContentfulContext);
   const pageId = 'home';
   const aboutMeRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     if (!data[pageId]) {
@@ -18,23 +17,8 @@ const Home = () => {
     }
 
     const handleScroll = () => {
-      if (aboutMeRef.current) {
-        const rect = aboutMeRef.current.getBoundingClientRect();
-        const scrollPosition = window.scrollY;
-        const sectionTop = rect.top + scrollPosition;
-        const windowHeight = window.innerHeight;
-        
-        // Calculate progress based on scroll position
-        const progress = Math.min(
-          Math.max(
-            (scrollPosition - (sectionTop - windowHeight)) / (windowHeight * 0.5),
-            0
-          ),
-          1
-        );
-        
-        setScrollProgress(progress);
-      }
+      // Removed unused progress calculation
+      // If you need scroll-based animations or effects, add them here
     };
 
     window.addEventListener('scroll', handleScroll);

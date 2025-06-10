@@ -75,14 +75,12 @@ const Header = () => {
 
   // Localized text
   const greeting = currentLocale === 'nl' ? 'Ik ben' : 'I am';
-  const linkedinText = currentLocale === 'nl' ? '→ LinkedIn' : '→ LinkedIn';
-  const emailText = currentLocale === 'nl' ? '→ E-mail' : '→ Email';
 
   return (
     <section className="relative font-medium text-xl md:text-h2 lg:text-h1 text-white" aria-label="Introduction">
       <h2 className="mb-4">
-        <span className="sr-only">{currentLocale === 'nl' ? 'Ik ben' : 'I am'}</span>
-        <span aria-hidden="true">{currentLocale === 'nl' ? 'Ik ben' : 'I am'} {dynamicText},</span>
+        <span className="sr-only">{greeting}</span>
+        <span aria-hidden="true">{greeting} {dynamicText},</span>
       </h2>
       <h1 className="max-w-[23ch] text-2xl md:text-h2 lg:text-h1">{introText}</h1>
 
@@ -92,7 +90,7 @@ const Header = () => {
           className="inline-block transition-all duration-300 group-hover:tracking-widest focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-midnight rounded"
           aria-label={currentLocale === 'nl' ? 'Bekijk LinkedIn profiel' : 'View LinkedIn profile'}
         >
-          {currentLocale === 'nl' ? '→ LinkedIn' : '→ LinkedIn'}
+          → LinkedIn
         </button>
 
         <button 
@@ -100,7 +98,7 @@ const Header = () => {
           className="inline-block transition-all duration-300 group-hover:tracking-widest focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-midnight rounded"
           aria-label={currentLocale === 'nl' ? 'Stuur een e-mail' : 'Send an email'}
         >
-          {currentLocale === 'nl' ? '→ E-mail' : '→ Email'}
+          → {currentLocale === 'nl' ? 'E-mail' : 'Email'}
         </button>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ContentfulContext } from '../api/contentfulFetch';
 import { useLocalization } from '../contexts/LocalizationContext';

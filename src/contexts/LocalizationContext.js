@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const LocalizationContext = createContext();
@@ -15,13 +15,13 @@ export const LocalizationProvider = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  const getCurrentLocale = () => {
+  const getCurrentLocale = useCallback(() => {
     const path = location.pathname;
     if (path.startsWith('/en')) {
       return 'en-US';
     }
     return 'nl';
-  };
+  }, [location.pathname]);
 
   const [currentLocale, setCurrentLocale] = useState(getCurrentLocale());
 
@@ -30,7 +30,7 @@ export const LocalizationProvider = ({ children }) => {
     if (newLocale !== currentLocale) {
       setCurrentLocale(newLocale);
     }
-  }, [location.pathname]);
+  }, [getCurrentLocale, currentLocale]);
 
   // Function to switch languages
   const switchLanguage = (newLocale) => {
