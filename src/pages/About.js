@@ -139,7 +139,7 @@ const About = () => {
       <section className="min-h-[50vh] bg-white flex items-center justify-center">
         <div className="container mx-auto px-6 py-16">
           <div className="max-w-4xl mx-auto">
-            <blockquote className="text-2xl md:text-4xl font-headings text-midnight text-center leading-relaxed italic">
+            <blockquote className="text-2xl md:text-2xl font-headings text-midnight text-center leading-relaxed italic">
               "{aboutCard?.fields?.paragraph}"
             </blockquote>
           </div>

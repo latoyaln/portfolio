@@ -44,10 +44,8 @@ const Projects = () => {
     }
 
     if (projectsRef.current.length > 0) {
-      // Clear existing ScrollTriggers
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
-      // Initialize GSAP animations for projects
       projectsRef.current.forEach((project, index) => {
         if (project) {
           const imageElement = project.querySelector('.project-image');
@@ -76,7 +74,6 @@ const Projects = () => {
         }
       });
 
-      // Progress bar animation
       if (progressBarRef.current && containerRef.current) {
         const projectsContainer = containerRef.current.querySelector('.bg-daylight');
         const lastProject = projectsRef.current[projectsRef.current.length - 1];
@@ -103,7 +100,6 @@ const Projects = () => {
     };
   }, [projectsRef.current.length]);
 
-  // Modal animation effect
   useEffect(() => {
     if (selectedProject && modalRef.current) {
       gsap.fromTo(modalRef.current,
@@ -133,7 +129,6 @@ const Projects = () => {
       )
     : [];
 
-  // Localized text
   const title = currentLocale === 'nl' ? 'Projecten' : 'Projects';
   const subtitle = currentLocale === 'nl' 
     ? 'Een gecureerde collectie van mijn werk, die ontwerpdenken, technische expertise en creatief probleemoplossen laat zien in verschillende digitale ervaringen.'
@@ -142,7 +137,6 @@ const Projects = () => {
   const projectOverview = currentLocale === 'nl' ? 'Project Overzicht' : 'Project Overview';
   const projectDetails = currentLocale === 'nl' ? 'Project Details' : 'Project Details';
 
-  // Get localized content for each project
   const getLocalizedContent = (project) => {
     const localizedFields = project.fields[currentLocale === 'nl' ? 'nl' : 'en'] || {};
     return {
@@ -163,7 +157,6 @@ const Projects = () => {
 
   return (
     <div className="relative" ref={containerRef}>
-      {/* Language Toggle */}
       <div className="fixed top-8 right-8 z-50">
         <button
           onClick={() => switchLanguage(isEnglish ? 'nl' : 'en-US')}
@@ -173,7 +166,6 @@ const Projects = () => {
         </button>
       </div>
 
-      {/* Progress Bar */}
       <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 w-1/2 h-1 bg-gray-200 z-10">
         <div 
           ref={progressBarRef}
@@ -182,9 +174,7 @@ const Projects = () => {
         />
       </div>
 
-      {/* Projects Content */}
       <div className="bg-daylight">
-        {/* Intro Section */}
         <div ref={introRef} className="container mx-auto px-6 py-32">
           <div className="text-center space-y-8">
             <h2 className="text-h2 font-headings text-midnight mb-2">
@@ -197,7 +187,6 @@ const Projects = () => {
           </div>
         </div>
 
-        {/* Projects Container */}
         <div className="container mx-auto px-6">
           {projects.map((project, index) => {
             const isEven = index % 2 === 0;
@@ -230,7 +219,6 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Content Section */}
                   <div className={`project-content space-y-6 ${!isEven ? 'order-1' : 'order-2'}`}>
                     <div className="space-y-2">
                       <h3 className="text-lg font-medium text-midnight/60 uppercase tracking-wider">
@@ -264,7 +252,6 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* Project Details Modal */}
       {selectedProject && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-8"
@@ -284,7 +271,6 @@ const Projects = () => {
                 <span className="text-4xl">×</span>
               </button>
 
-              {/* Project content */}
               <div className="grid grid-cols-2 h-full">
                 <div className="relative h-full">
                   {selectedProject.fields?.coverImage?.fields?.file?.url && (
@@ -328,7 +314,6 @@ const Projects = () => {
         </div>
       )}
 
-      {/* CTA Section */}
       <section className="relative z-0">
         <CTA />
       </section>
