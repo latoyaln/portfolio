@@ -125,14 +125,14 @@ const Projects = () => {
 
   const projects = Array.isArray(projectsSection?.fields?.components)
     ? projectsSection.fields.components.filter(
-        (project, idx) => idx !== 0 && project.fields?.coverImage?.fields?.file?.url
+        (project) => project.fields?.coverImage?.fields?.file?.url
       )
     : [];
 
   const title = currentLocale === 'nl' ? 'Projecten' : 'Projects';
   const subtitle = currentLocale === 'nl' 
-    ? 'Een gecureerde collectie van mijn werk, die ontwerpdenken, technische expertise en creatief probleemoplossen laat zien in verschillende digitale ervaringen.'
-    : 'A curated collection of my work, showcasing design thinking, technical expertise, and creative problem-solving across various digital experiences.';
+    ? 'Een collectie van mijn werk, die ontwerpdenken, technische expertise en creatief probleemoplossen laat zien in verschillende digitale ervaringen.'
+    : 'A collection of my work, showcasing design thinking, technical expertise, and creative problem-solving across various digital experiences.';
   const viewProject = currentLocale === 'nl' ? 'Bekijk Project' : 'View Project';
   const projectOverview = currentLocale === 'nl' ? 'Project Overzicht' : 'Project Overview';
   const projectDetails = currentLocale === 'nl' ? 'Project Details' : 'Project Details';
@@ -146,14 +146,6 @@ const Projects = () => {
       slug: localizedFields.slug || project.fields.slug
     };
   };
-
-  if (!projects.length) {
-    return (
-      <div className="min-h-screen bg-daylight p-8 flex items-center justify-center">
-        <p className="text-xl">{currentLocale === 'nl' ? 'Projecten laden...' : 'Loading projects...'}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="relative" ref={containerRef}>
@@ -175,7 +167,7 @@ const Projects = () => {
       </div>
 
       <div className="bg-daylight">
-        <div ref={introRef} className="container mx-auto px-6 py-32">
+        <div ref={introRef} className="container mx-auto px-6 pb-5 pt-16">
           <div className="text-center space-y-8">
             <h2 className="text-h2 font-headings text-midnight mb-2">
               {title}
@@ -197,9 +189,9 @@ const Projects = () => {
                 ref={(el) => (projectsRef.current[index] = el)}
                 className="min-h-screen flex items-center py-20"
               >
-                <div className={`grid grid-cols-2 gap-12 items-center w-full ${!isEven ? 'direction-reverse' : ''}`}>
+                <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full ${!isEven ? 'md:direction-reverse' : ''}`}>
                   <div 
-                    className={`project-image relative group cursor-pointer ${!isEven ? 'order-2' : 'order-1'}`}
+                    className={`project-image relative group cursor-pointer ${!isEven ? 'md:order-2' : 'md:order-1'}`}
                     onClick={() => setSelectedProject(project)}
                   >
                     <div className="relative overflow-hidden rounded-lg">
@@ -219,7 +211,7 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <div className={`project-content space-y-6 ${!isEven ? 'order-1' : 'order-2'}`}>
+                  <div className={`project-content space-y-6 ${!isEven ? 'md:order-1' : 'md:order-2'}`}>
                     <div className="space-y-2">
                       <h3 className="text-lg font-medium text-midnight/60 uppercase tracking-wider">
                         {currentLocale === 'nl' ? 'Project' : 'Project'} {String(index + 1).padStart(2, '0')}
@@ -263,7 +255,6 @@ const Projects = () => {
             onClick={e => e.stopPropagation()}
           >
             <div className="relative h-full">
-              {/* Close button */}
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-8 right-8 z-20 text-midnight hover:text-midnight/60 transition-colors duration-300"
@@ -271,8 +262,8 @@ const Projects = () => {
                 <span className="text-4xl">×</span>
               </button>
 
-              <div className="grid grid-cols-2 h-full">
-                <div className="relative h-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+                <div className="relative h-[50vh] md:h-full">
                   {selectedProject.fields?.coverImage?.fields?.file?.url && (
                     <img
                       src={selectedProject.fields.coverImage.fields.file.url}
@@ -281,7 +272,7 @@ const Projects = () => {
                     />
                   )}
                 </div>
-                <div className="p-16 overflow-y-auto">
+                <div className="p-8 md:p-16 overflow-y-auto">
                   <div className="max-w-2xl mx-auto space-y-12">
                       <h2 className="text-h2 font-headings text-midnight mb-4">
                         {getLocalizedContent(selectedProject).title}

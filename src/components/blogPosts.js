@@ -4,7 +4,7 @@ import { ContentfulContext } from '../api/contentfulFetch';
 import { useLocalization } from '../contexts/LocalizationContext';
 import SEO from './Seo';
 
-const BlogPosts = () => {
+const BlogPosts = ({ selectedYear = 'all', selectedCategory = 'all', showSeeMoreButton = true }) => {
   const { data, fetchPageData } = useContext(ContentfulContext);
   const { currentLocale, getLocalizedPath } = useLocalization();
   const pageId = 'home';
@@ -23,6 +23,23 @@ const BlogPosts = () => {
 
   const posts = blogPosts?.fields?.components || [];
 
+  // Filter posts based on selected year and category
+  const filteredPosts = posts.filter(post => {
+    const postDate = new Date(post.fields.date);
+    const postYear = postDate.getFullYear().toString();
+    const postCategories = post.fields.subjects || [];
+
+    const yearMatch = selectedYear === 'all' || postYear === selectedYear;
+    const categoryMatch = selectedCategory === 'all' || postCategories.includes(selectedCategory);
+
+    return yearMatch && categoryMatch;
+  });
+
+  // Sort posts by date (newest first)
+  const sortedPosts = [...filteredPosts].sort((a, b) => {
+    return new Date(b.fields.date) - new Date(a.fields.date);
+  });
+
   const blogTitle = currentLocale === 'nl' ? 'Blog - LN Design' : 'Blog - LN Design';
   const blogDescription = currentLocale === 'nl' 
     ? 'Ontdek de nieuwste inzichten over frontend development, webdesign en grafisch ontwerp van LN Design.'
@@ -30,8 +47,9 @@ const BlogPosts = () => {
 
   const readMoreText = currentLocale === 'nl' ? 'Lees meer over' : 'Read more about';
   const noPostsText = currentLocale === 'nl' ? 'Geen blogposts gevonden.' : 'No blog posts found.';
+  const seeMoreText = currentLocale === 'nl' ? 'Bekijk alle posts' : 'See all posts';
 
-  if (!posts.length) {
+  if (!sortedPosts.length) {
     return (
       <>
         <SEO 
@@ -51,9 +69,9 @@ const BlogPosts = () => {
         title={blogTitle}
         description={blogDescription}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {posts.map((post) => {
+          {sortedPosts.map((post) => {
             const linkText = `${readMoreText} ${post.fields.title}`;
             const blogPostUrl = getLocalizedPath(`/blog/${post.sys.id}`);
             
@@ -82,6 +100,9 @@ const BlogPosts = () => {
                         {post.fields.subjects[0]}
                       </span>
                     )}
+                    <span className="text-sm text-gray-500">
+                      {new Date(post.fields.date).toLocaleDateString(currentLocale === 'nl' ? 'nl-NL' : 'en-US')}
+                    </span>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
                     <Link 
@@ -122,6 +143,26 @@ const BlogPosts = () => {
             );
           })}
         </div>
+        
+        {/* See More Button */}
+        {showSeeMoreButton && (
+          <div className="text-center mt-12">
+            <Link
+              to={getLocalizedPath('/blog')}
+              className="inline-flex items-center px-6 py-3 bg-midnight text-daylight rounded-lg hover:bg-midnight/90 focus:outline-none focus:ring-2 focus:ring-midnight focus:ring-offset-2 transition-colors duration-300"
+            >
+              {seeMoreText}
+              <svg 
+                className="w-5 h-5 ml-2" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

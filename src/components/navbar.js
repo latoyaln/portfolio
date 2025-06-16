@@ -10,6 +10,7 @@ const Navbar = () => {
   const links = [
     { label: currentLocale === 'nl' ? 'Home' : 'Home', url: "/" },
     { label: currentLocale === 'nl' ? 'Projecten' : 'Projects', url: "/projects" },
+    { label: currentLocale === 'nl' ? 'Blog' : 'Blog', url: "/blog" },
     { label: currentLocale === 'nl' ? 'Over' : 'About', url: "/about" },
   ];
 
@@ -86,12 +87,12 @@ const Navbar = () => {
             </button>
           </div>
 
-          <button
-            onClick={() => (window.location.href = "mailto:l.n.design@hotmail.com")}
+          <Link
+            to={getLocalizedPath("/contact")}
             className="hidden md:inline-block border-2 border-daylight text-daylight px-4 py-2 rounded-lg relative overflow-hidden bg-transparent hover:bg-daylight hover:text-black transition-all"
           >
             {currentLocale === 'nl' ? 'Contact' : 'Contact Me'}
-          </button>
+          </Link>
           
           <button
             className="md:hidden border-2 border-daylight text-daylight px-4 py-2 rounded-lg relative overflow-hidden bg-transparent hover:bg-daylight hover:text-black transition-all"
@@ -139,12 +140,12 @@ const Navbar = () => {
               </Link>
             ))}
             
-            <button
-              onClick={() => (window.location.href = "mailto:l.n.design@hotmail.com")}
+            <Link
+              to={getLocalizedPath("/contact")}
               className="mt-4 inline-block bg-daylight text-midnight px-4 py-2 rounded-lg hover:scale-110 transition transform"
             >
               {currentLocale === 'nl' ? 'Contact' : 'Contact Me'}
-            </button>
+            </Link>
             
             <div className="mt-6">
               <Link to={getLocalizedPath("/")} onClick={() => setIsOpen(false)}>

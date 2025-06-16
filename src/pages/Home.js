@@ -7,7 +7,7 @@ import CTA from '../components/cta';
 import BlogPosts from '../components/blogPosts';
 
 const Home = () => {
-  const { data, loading, fetchPageData } = useContext(ContentfulContext);
+  const { data, fetchPageData } = useContext(ContentfulContext);
   const pageId = 'home';
   const aboutMeRef = useRef(null);
 
@@ -17,8 +17,6 @@ const Home = () => {
     }
 
     const handleScroll = () => {
-      // Removed unused progress calculation
-      // If you need scroll-based animations or effects, add them here
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -28,14 +26,6 @@ const Home = () => {
   const scrollToAboutMe = () => {
     aboutMeRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  if (loading || !data[pageId]) {
-    return (
-      <div className="loading-state flex items-center justify-center min-h-screen bg-daylight">
-        <div className="text-midnight text-xl">Loading Home...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="relative">
@@ -49,8 +39,6 @@ const Home = () => {
         <SelectedProjects onScrollToAbout={scrollToAboutMe} />
       </div>
 
-      
-      {/* About Me Section */}
       <section 
         ref={aboutMeRef} 
         className="relative bg-white"
@@ -61,16 +49,13 @@ const Home = () => {
         <AboutMe />
       </section>
 
-      {/* Blog Posts Section */}
       <section className="relative bg-daylight py-20">
         <div className="container text-center mx-auto px-4 sm:px-6 mb-12">
           <h2 className="text-h2 font-headings text-midnight mb-2">Blog</h2>
-       
         </div>
         <BlogPosts />
       </section>
 
-      {/* CTA Section */}
       <section className="relative bg-daylight">
         <CTA />
       </section>

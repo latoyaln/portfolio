@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useEffect } from 'react';
 import client from './contentful';
 
 export const ContentfulContext = createContext();
@@ -18,7 +18,7 @@ export const ContentfulProvider = ({ children }) => {
       return response.items;
     } catch (error) {
       console.error(`Error fetching ${contentType} data from Contentful:`, error);
-      throw error; // Re-throw to handle in fetchPageData
+      throw error;
     }
   };
 
@@ -50,7 +50,6 @@ export const ContentfulProvider = ({ children }) => {
         }
       }
 
-      // Store data with both the localized key and the simple pageId key for backwards compatibility
       const dataKey = `${pageId}-${locale}`;
       setData((prevData) => ({
         ...prevData,
@@ -58,10 +57,10 @@ export const ContentfulProvider = ({ children }) => {
         [pageId]: pageData,
       }));
 
-      return pageData; // Return the data for Promise.all handling
+      return pageData;
     } catch (error) {
       console.error('Error fetching page data:', error);
-      throw error; // Re-throw to handle in useEffect
+      throw error;
     }
   }, []);
 
@@ -77,7 +76,10 @@ export const ContentfulProvider = ({ children }) => {
           fetchPageData('about-lndesign', 'nl')
         ]);
         
-        setLoading(false);
+        // Add a small delay to ensure smooth transition
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       } catch (error) {
         console.error('Error during initial data fetch:', error);
         setError(error);
