@@ -14,14 +14,14 @@ const BlogPost = () => {
   const pageId = 'home';
 
   useEffect(() => {
-    if (!data[pageId]) {
-      fetchPageData(pageId);
+    if (!data[`${pageId}-${currentLocale}`]) {
+      fetchPageData(pageId, currentLocale);
     }
-  }, [data, fetchPageData, pageId]);
+  }, [data, fetchPageData, pageId, currentLocale]);
 
   const itemCollection =
-    data?.[pageId]?.content?.itemCollection?.items ||
-    data?.[pageId]?.content?.itemCollection ||
+    data?.[`${pageId}-${currentLocale}`]?.content?.itemCollection?.items ||
+    data?.[`${pageId}-${currentLocale}`]?.content?.itemCollection ||
     [];
 
   const blogPosts = itemCollection.find(
@@ -31,7 +31,6 @@ const BlogPost = () => {
   const posts = blogPosts?.fields?.components || [];
   const post = posts.find((p) => p.sys.id === id);
 
-  // Localized text
   const backToHomeText = currentLocale === 'nl' ? 'Terug naar Home' : 'Back to Home';
   const postNotFoundText = currentLocale === 'nl' ? 'Post Niet Gevonden' : 'Post Not Found';
   const returnToHomeText = currentLocale === 'nl' ? 'Terug naar Home' : 'Return to Home';

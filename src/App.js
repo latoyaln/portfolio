@@ -7,12 +7,12 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from "./components/navbar";
 import Home from './pages/Home'; 
 import BlogPost from './components/blogPost';
-import Blog from './pages/Blog';
 import SEO from './components/Seo';
 import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import LoadingState from './components/LoadingState';
+import Blog from './pages/Blog';
 
 const AppContent = () => {
   const { loading } = useContext(ContentfulContext);
@@ -34,8 +34,6 @@ const AppContent = () => {
           <Route path="/en" element={
               <Home />
           } />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/en/blog" element={<Blog />} />
           <Route path="/blog/:id" element={
               <BlogPost />
           } />
@@ -59,6 +57,12 @@ const AppContent = () => {
           } />
           <Route path="/en/contact" element={
               <Contact />
+          } />
+          <Route path="/blog" element={
+              <Blog />
+          } />
+          <Route path="/en/blog" element={
+              <Blog />
           } />
         </Routes>
       </AnimatePresence>

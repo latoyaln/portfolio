@@ -14,18 +14,20 @@ const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    if (!data[pageId]) {
-      fetchPageData(pageId);
+    if (!data[`${pageId}-${currentLocale}`]) {
+      fetchPageData(pageId, currentLocale);
     }
-  }, [data, fetchPageData, pageId]);
+  }, [data, fetchPageData, pageId, currentLocale]);
 
-  const itemCollection = data?.[pageId]?.content?.itemCollection?.items || data?.[pageId]?.content?.itemCollection || [];
+  const itemCollection = data?.[`${pageId}-${currentLocale}`]?.content?.itemCollection?.items || data?.[`${pageId}-${currentLocale}`]?.content?.itemCollection || [];
 
   const blogPosts = itemCollection.find(
     (item) => item.fields?.internalName === 'BlogPosts'
   );
+  console.log('blogPosts:', blogPosts);
 
   const posts = blogPosts?.fields?.components || [];
+  console.log('posts:', posts);
 
   // Get unique years and categories from posts
   const years = ['all', ...new Set(posts.map(post => {
@@ -86,7 +88,6 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Live Coding Editor Section */}
       <section className="bg-midnight py-20">
         <div className="container mx-auto px-4 sm:px-6">
           <h2 className="text-3xl font-bold text-daylight mb-8 text-center">
@@ -98,16 +99,16 @@ const Blog = () => {
             <div className="bg-white rounded-lg p-4">
               <h3 className="text-xl font-semibold text-midnight mb-4">React Live Example</h3>
               <LiveProvider code={`function Example() {
-  const [count, setCount] = React.useState(0);
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
-    </div>
-  );
-}`}>
+                  const [count, setCount] = React.useState(0);
+                  return (
+                    <div>
+                      <p>Count: {count}</p>
+                      <button onClick={() => setCount(count + 1)}>
+                        Increment
+                      </button>
+                    </div>
+                  );
+                }`}>
                 <LiveEditor className="rounded-lg mb-4" />
                 <LiveError className="text-red-500 mb-4" />
                 <LivePreview className="p-4 border border-gray-200 rounded-lg" />
@@ -121,13 +122,13 @@ const Blog = () => {
                 template="react"
                 files={{
                   "/App.js": `export default function App() {
-  return (
-    <div>
-      <h1>Hello Sandpack!</h1>
-      <p>Start editing to see some magic happen!</p>
-    </div>
-  );
-}`,
+                      return (
+                        <div>
+                          <h1>Hello Sandpack!</h1>
+                          <p>Start editing to see some magic happen!</p>
+                        </div>
+                      );
+                    }`,
                 }}
                 options={{
                   showNavigator: true,

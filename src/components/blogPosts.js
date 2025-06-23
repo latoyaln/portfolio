@@ -10,12 +10,12 @@ const BlogPosts = ({ selectedYear = 'all', selectedCategory = 'all', showSeeMore
   const pageId = 'home';
 
   useEffect(() => {
-    if (!data[pageId]) {
-      fetchPageData(pageId);
+    if (!data[`${pageId}-${currentLocale}`]) {
+      fetchPageData(pageId, currentLocale);
     }
-  }, [data, fetchPageData, pageId]);
+  }, [data, fetchPageData, pageId, currentLocale]);
 
-  const itemCollection = data?.[pageId]?.content?.itemCollection?.items || data?.[pageId]?.content?.itemCollection || [];
+  const itemCollection = data?.[`${pageId}-${currentLocale}`]?.content?.itemCollection?.items || data?.[`${pageId}-${currentLocale}`]?.content?.itemCollection || [];
 
   const blogPosts = itemCollection.find(
     (item) => item.fields?.internalName === 'BlogPosts'
@@ -23,7 +23,6 @@ const BlogPosts = ({ selectedYear = 'all', selectedCategory = 'all', showSeeMore
 
   const posts = blogPosts?.fields?.components || [];
 
-  // Filter posts based on selected year and category
   const filteredPosts = posts.filter(post => {
     const postDate = new Date(post.fields.date);
     const postYear = postDate.getFullYear().toString();
@@ -144,7 +143,6 @@ const BlogPosts = ({ selectedYear = 'all', selectedCategory = 'all', showSeeMore
           })}
         </div>
         
-        {/* See More Button */}
         {showSeeMoreButton && (
           <div className="text-center mt-12">
             <Link

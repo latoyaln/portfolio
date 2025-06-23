@@ -51,13 +51,11 @@ const Projects = () => {
           const imageElement = project.querySelector('.project-image');
           const contentElement = project.querySelector('.project-content');
           
-          // Set initial state
           gsap.set([imageElement, contentElement], {
             opacity: 0,
             y: 100
           });
 
-          // Animate on scroll
           gsap.to([imageElement, contentElement], {
             opacity: 1,
             y: 0,
@@ -127,6 +125,15 @@ const Projects = () => {
     ? projectsSection.fields.components.filter(
         (project) => project.fields?.coverImage?.fields?.file?.url
       )
+    : [];
+
+  // Find all projects in the 'Projects' section
+  const allProjectsSection = itemCollection.find(
+    (item) => item.fields?.internalName === 'Projects'
+  );
+
+  const allProjects = Array.isArray(allProjectsSection?.fields?.components)
+    ? allProjectsSection.fields.components
     : [];
 
   const title = currentLocale === 'nl' ? 'Projecten' : 'Projects';
@@ -308,7 +315,9 @@ const Projects = () => {
       <section className="relative z-0">
         <CTA />
       </section>
-    </div>
+
+     
+</div>
   );
 };
 

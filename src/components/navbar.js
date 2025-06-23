@@ -104,7 +104,6 @@ const Navbar = () => {
 
         {isOpen && (
           <div className="fixed top-[72px] left-0 right-0 w-full bg-midnight text-daydream text-center py-4 md:hidden z-[99] shadow-lg">
-            {/* Mobile Language Toggle */}
             <div className="flex justify-center space-x-4 mb-4 border-b border-daylight/20 pb-4">
               <button
                 onClick={() => handleLanguageSwitch('nl')}
@@ -159,7 +158,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      {/* Add padding to prevent content from hiding under fixed navbar */}
       <div className="h-[72px]"></div>
     </div>
   );

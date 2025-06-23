@@ -76,7 +76,6 @@ export const ContentfulProvider = ({ children }) => {
           fetchPageData('about-lndesign', 'nl')
         ]);
         
-        // Add a small delay to ensure smooth transition
         setTimeout(() => {
           setLoading(false);
         }, 500);

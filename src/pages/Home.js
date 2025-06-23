@@ -29,12 +29,10 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
       <section className="flex p-10 justify-center h-screen items-center overflow-hidden bg-midnight relative"> 
         <Header />
       </section>
       
-      {/* Selected Projects Section */}
       <div className="relative">
         <SelectedProjects onScrollToAbout={scrollToAboutMe} />
       </div>

@@ -26,11 +26,8 @@ export const LocalizationProvider = ({ children }) => {
   const [currentLocale, setCurrentLocale] = useState(getCurrentLocale());
 
   useEffect(() => {
-    const newLocale = getCurrentLocale();
-    if (newLocale !== currentLocale) {
-      setCurrentLocale(newLocale);
-    }
-  }, [getCurrentLocale, currentLocale]);
+    setCurrentLocale(getCurrentLocale());
+  }, [getCurrentLocale]);
 
   // Function to switch languages
   const switchLanguage = (newLocale) => {
